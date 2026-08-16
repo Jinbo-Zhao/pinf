@@ -197,4 +197,3 @@ GUI/                             # Streamlit app + helpers + example data
 ## References
 
 - Zhao, J., G. Keslin, D. J. Eckman, and B. L. Nelson. "[Methods of Plausible Inference: The Definitive Cookbook](https://www.informs-sim.org/wsc25papers/inv171.pdf)". Proceedings of the 2025 Winter Simulation Conference. 2025. 88–102.
-- See `Dev_Notes.md` for implementation notes and design decisions.
