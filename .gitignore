@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.DS_Store
+.ipynb_checkpoints/
+CODE_REVIEW_plausible_inference.md
+
+# Editor / environment / tooling directories
+.conda/
+.vscode/
+
+# Streamlit GUI run outputs
+GUI/inference_results/

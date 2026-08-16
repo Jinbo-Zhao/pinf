@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plausible-inference"
+version = "0.1.0"
+description = "Plausible inference models with Pyomo (screening, intervals, pixelization, structural feasibility)."
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["optimization", "pyomo", "plausible inference"]
+dependencies = [
+    "numpy>=1.22",
+    "pyomo>=6.6",
+    "scipy>=1.9",
+]
+
+[project.optional-dependencies]
+gui = [
+    "matplotlib>=3.6",
+    "pandas>=1.5",
+    "streamlit>=1.28",
+    "openpyxl>=3.1",
+]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
