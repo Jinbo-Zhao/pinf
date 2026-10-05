@@ -194,6 +194,14 @@ GUI/                             # Streamlit app + helpers + example data
 
 ---
 
+## License
+
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
+
+Copyright (c) 2026 Jinbo Zhao and David J. Eckman.
+
+---
+
 ## References
 
 - Zhao, J., G. Keslin, D. J. Eckman, and B. L. Nelson. "[Methods of Plausible Inference: The Definitive Cookbook](https://www.informs-sim.org/wsc25papers/inv171.pdf)". Proceedings of the 2025 Winter Simulation Conference. 2025. 88–102.
