@@ -25,7 +25,14 @@ gui = [
 dev = [
     "pytest>=7.0",
     "ruff>=0.1.0",
+    "pandas>=1.5",
+]
+solvers = [
+    "gurobipy>=10.0",
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

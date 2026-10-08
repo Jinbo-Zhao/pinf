@@ -194,6 +194,19 @@ GUI/                             # Streamlit app + helpers + example data
 
 ---
 
+## Testing
+
+```bash
+pip install -e ".[dev,solvers]"
+pytest
+```
+
+Solve tests need Gurobi and SCIP available through Pyomo. The `solvers` extra
+installs `gurobipy`; install the SCIP executable separately so that `scip` is on
+`PATH`.
+
+---
+
 ## References
 
 - Zhao, J., G. Keslin, D. J. Eckman, and B. L. Nelson. "[Methods of Plausible Inference: The Definitive Cookbook](https://www.informs-sim.org/wsc25papers/inv171.pdf)". Proceedings of the 2025 Winter Simulation Conference. 2025. 88–102.
