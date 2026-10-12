@@ -700,7 +700,7 @@ def main() -> None:
         help=f"At most {cpu_max} processes on this machine.",
     )
     pool_processes = int(min(max(1, pool_processes), cpu_max))
-    solver_name = st.selectbox("Solver", ("gurobi", "scip"), index=0)
+    solver_name = st.selectbox("Solver", ("gurobi", "scip", "scip_direct"), index=0)
     skip_feas_check = st.checkbox(
         "Skip structural feasibility check",
         value=False,

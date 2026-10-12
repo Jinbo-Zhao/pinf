@@ -40,7 +40,7 @@ pip install -e ".[dev]"
 pip install -e ".[docs]"
 ```
 
-Requires Python ≥ 3.10, NumPy, SciPy, Pyomo, and a MILP/NLP **solver** (see
+Requires Python ≥ 3.10, NumPy, pandas, SciPy, Pyomo, and a MILP/NLP **solver** (see
 the Solvers section).
 <!-- end: installation -->
 
@@ -170,10 +170,17 @@ presolve can otherwise hide (`INF_OR_UNBD`). Always create the solver via
 - **Gurobi** — `DualReductions = 0`
 - **SCIP** — disables strong/weak dual reductions
 
+SCIP can be used through either Pyomo interface:
+
+| Solver name | How to install |
+|---|---|
+| `scip_direct` | `pip install -e ".[solvers]"` (installs PySCIPOpt, which bundles SCIP) |
+| `scip` | the SCIP executable on `PATH`, e.g. `conda install -c conda-forge scip` |
+
 GLPK is **not** supported for plausibility inference.
 
 The structural feasibility
-pre-check (`feasibility_check_solver`) supports `gurobi` / `gurobi_direct` / `scip`.
+pre-check (`feasibility_check_solver`) supports `gurobi` / `gurobi_direct` / `scip` / `scip_direct`.
 <!-- end: solvers -->
 
 ---
@@ -227,8 +234,9 @@ pytest
 ```
 
 Solve tests need Gurobi and SCIP available through Pyomo. The `solvers` extra
-installs `gurobipy`; install the SCIP executable separately so that `scip` is on
-`PATH`.
+installs `gurobipy` and PySCIPOpt (for `scip_direct`). Tests of the `scip`
+interface also need the SCIP executable on `PATH`
+(e.g. `conda install -c conda-forge scip`).
 <!-- end: testing -->
 
 ---

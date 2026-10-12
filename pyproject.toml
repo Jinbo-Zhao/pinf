@@ -12,6 +12,7 @@ requires-python = ">=3.10"
 keywords = ["optimization", "pyomo", "plausible inference"]
 dependencies = [
     "numpy>=1.22",
+    "pandas>=1.5",
     "pyomo>=6.6",
     "scipy>=1.9",
 ]
@@ -19,17 +20,16 @@ dependencies = [
 [project.optional-dependencies]
 gui = [
     "matplotlib>=3.6",
-    "pandas>=1.5",
     "streamlit>=1.28",
     "openpyxl>=3.1",
 ]
 dev = [
     "pytest>=7.0",
     "ruff>=0.1.0",
-    "pandas>=1.5",
 ]
 solvers = [
     "gurobipy>=10.0",
+    "pyscipopt>=5.0",
 ]
 docs = [
     "sphinx>=7.2",

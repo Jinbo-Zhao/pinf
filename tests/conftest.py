@@ -43,3 +43,11 @@ def scip_solver():
         "scip",
         "Install the SCIP executable so that `scip` is on PATH, then re-run pytest.",
     )
+
+
+@pytest.fixture(scope="session")
+def scip_direct_solver():
+    return _require_plausibility_solver(
+        "scip_direct",
+        "Install PySCIPOpt (pip install -e \".[solvers]\"), then re-run pytest.",
+    )
