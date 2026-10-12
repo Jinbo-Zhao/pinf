@@ -7,6 +7,7 @@ name = "plausible-inference"
 version = "0.1.0"
 description = "Plausible inference models with Pyomo (screening, intervals, pixelization, structural feasibility)."
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.10"
 keywords = ["optimization", "pyomo", "plausible inference"]
 dependencies = [

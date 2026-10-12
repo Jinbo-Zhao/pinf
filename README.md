@@ -194,6 +194,11 @@ GUI/                             # Streamlit app + helpers + example data
 
 ---
 
+## License
+
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
+
+Copyright (c) 2026 Jinbo Zhao and David J. Eckman.
 ## Testing
 
 ```bash
