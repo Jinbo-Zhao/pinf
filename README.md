@@ -199,6 +199,16 @@ GUI/                             # Streamlit app + helpers + example data
 This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 Copyright (c) 2026 Jinbo Zhao and David J. Eckman.
+## Testing
+
+```bash
+pip install -e ".[dev,solvers]"
+pytest
+```
+
+Solve tests need Gurobi and SCIP available through Pyomo. The `solvers` extra
+installs `gurobipy`; install the SCIP executable separately so that `scip` is on
+`PATH`.
 
 ---
 
