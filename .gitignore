@@ -7,7 +7,9 @@ CODE_REVIEW_plausible_inference.md
 
 # Editor / environment / tooling directories
 .conda/
+.venv/
 .vscode/
+.pytest_cache/
 
 # Streamlit GUI run outputs
 GUI/inference_results/
