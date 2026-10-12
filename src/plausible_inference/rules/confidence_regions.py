@@ -91,7 +91,7 @@ def _validate_discrepancy_inputs(sample_mean, sample_var, sample_size, k, d, dis
 # ============================================================
 
 def set_discrepancy_infinite(model, sample_mean, sample_var, sample_size):
-    """Norm-infinite discrepancy: max_i C_i |m[i,d] - mu[i,d]| per objective d.
+    """Norm-infinite discrepancy: ``max_i C_i |m[i,d] - mu[i,d]|`` per objective d.
 
     Args:
         sample_mean : (k, d)
@@ -110,7 +110,7 @@ def set_discrepancy_infinite(model, sample_mean, sample_var, sample_size):
 
 
 def set_discrepancy_norm_1(model, sample_mean, sample_var, sample_size):
-    """Norm-1 discrepancy: sum_i C_i |m[i,d] - mu[i,d]| per objective d.
+    """Norm-1 discrepancy: ``sum_i C_i |m[i,d] - mu[i,d]|`` per objective d.
 
     Args:
         sample_mean : (k, d)

@@ -1,5 +1,10 @@
 # Plausible Inference
 
+[![Documentation Status](https://readthedocs.org/projects/pinf/badge/?version=latest)](https://pinf.readthedocs.io/en/latest/)
+
+📖 **Documentation:** <https://pinf.readthedocs.io>
+
+<!-- start: intro -->
 This repository contains code for **plausible inference** methods (Zhao et al. 2025) for analyzing the outputs of simulation experiments. The methods involve optimization sub-routines built on
 [Pyomo](https://www.pyomo.org/). Given a set of simulated solutions — each with a
 confidence region on its objective value(s) — and assumptions about the structure of
@@ -12,10 +17,12 @@ performs inference tasks including:
   `x0` over all objective values that are consistent with the data and assumptions?
 - **Pixelization:** which regions of the decision (input) space or objective (output) space
   correspond to plausibly acceptable solutions?
+<!-- end: intro -->
 
 ---
 
 ## Installation
+<!-- start: installation -->
 
 The package uses a `src/` layout (package name `plausible-inference`).
 
@@ -28,14 +35,19 @@ pip install -e ".[gui]"
 
 # dev (pytest, ruff)
 pip install -e ".[dev]"
+
+# docs (Sphinx, Read the Docs theme, MyST)
+pip install -e ".[docs]"
 ```
 
 Requires Python ≥ 3.10, NumPy, SciPy, Pyomo, and a MILP/NLP **solver** (see
-[Solvers](#solvers)).
+the Solvers section).
+<!-- end: installation -->
 
 ---
 
 ## Main Elements
+<!-- start: concepts -->
 
 | Concept | Meaning |
 |---|---|
@@ -74,10 +86,12 @@ Parameters are passed via `acceptability_parameters`.
 `norm_1`, `norm_2`, `norm_infinite`, `CRN` (from per-point statistics, with a
 Bonferroni-corrected cutoff across objectives), or `confidence_region`
 (use explicit precomputed `upper/lower_confidence_bounds`).
+<!-- end: concepts -->
 
 ---
 
 ## Quick Start
+<!-- start: quickstart -->
 
 ```python
 import numpy as np
@@ -142,10 +156,12 @@ results = run_execution_engine(
     candidates,
 )
 ```
+<!-- end: quickstart -->
 
 ---
 
 ## Solvers
+<!-- start: solvers -->
 
 Plausible inference must distinguish **infeasible** from **unbounded**, which solver
 presolve can otherwise hide (`INF_OR_UNBD`). Always create the solver via
@@ -158,10 +174,12 @@ GLPK is **not** supported for plausibility inference.
 
 The structural feasibility
 pre-check (`feasibility_check_solver`) supports `gurobi` / `gurobi_direct` / `scip`.
+<!-- end: solvers -->
 
 ---
 
 ## Streamlit GUI
+<!-- start: gui -->
 
 ```bash
 streamlit run GUI/GUI_beta.py
@@ -170,6 +188,7 @@ streamlit run GUI/GUI_beta.py
 The GUI guides the user through problem setup, acceptability + threshold inputs, simulation
 upload (statistics or bounds templates), procedure-specific inputs (candidate points or
 pixel grids), and runs the inference with downloadable results.
+<!-- end: gui -->
 
 ---
 
@@ -200,6 +219,7 @@ This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for det
 
 Copyright (c) 2026 Jinbo Zhao and David J. Eckman.
 ## Testing
+<!-- start: testing -->
 
 ```bash
 pip install -e ".[dev,solvers]"
@@ -209,9 +229,12 @@ pytest
 Solve tests need Gurobi and SCIP available through Pyomo. The `solvers` extra
 installs `gurobipy`; install the SCIP executable separately so that `scip` is on
 `PATH`.
+<!-- end: testing -->
 
 ---
 
 ## References
+<!-- start: references -->
 
 - Zhao, J., G. Keslin, D. J. Eckman, and B. L. Nelson. "[Methods of Plausible Inference: The Definitive Cookbook](https://www.informs-sim.org/wsc25papers/inv171.pdf)". Proceedings of the 2025 Winter Simulation Conference. 2025. 88–102.
+<!-- end: references -->

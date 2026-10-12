@@ -1,2 +1,1 @@
-# plausible_inference package
-
+"""Plausible inference models built on Pyomo."""

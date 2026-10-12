@@ -13,3 +13,8 @@ CODE_REVIEW_plausible_inference.md
 
 # Streamlit GUI run outputs
 GUI/inference_results/
+
+# Sphinx build output and notebook copies made by docs/source/conf.py
+docs/build/
+docs/source/tutorials/
+build/
