@@ -65,6 +65,7 @@ autoapi_options = ["members", "undoc-members", "show-inheritance", "show-module-
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
+html_css_files = ["custom.css"]  # wrap long table cells
 html_context = {
     "display_github": True,
     "github_user": "Jinbo-Zhao",

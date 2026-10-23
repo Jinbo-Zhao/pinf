@@ -47,8 +47,7 @@ Generated, git-ignored paths (never edit them):
 - `docs/source/tutorials/`: copies of the notebooks, made by `conf.py` on every build.
 - `docs/source/autoapi/`: API pages, generated during the build.
 
-Anything in `docs/` outside `docs/source/` (such as this file or
-`docs/superpowers/`) is not part of the site.
+Anything in `docs/` outside `docs/source/` (such as this file) is not part of the site.
 
 ## Common edits
 
@@ -157,7 +156,10 @@ Edit [`source/conf.py`](source/conf.py): `html_theme` for the theme,
 `extensions` for Sphinx extensions, `autoapi_*` options for the API reference,
 and `project` / `release` for the name and version. A new extension must also be
 added to the `docs` extra in `pyproject.toml`, or Read the Docs cannot install it.
-Static files such as a logo or favicon go in `source/_static/`.
+Static files such as a logo or favicon go in `source/_static/`. Style tweaks go
+in [`source/_static/custom.css`](source/_static/custom.css), which `conf.py`
+loads through `html_css_files`; it currently makes table cells wrap instead of
+forcing horizontal scrolling.
 
 ## Publishing
 
