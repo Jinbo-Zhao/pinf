@@ -1,15 +1,33 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pinf"
-version = "0.1.0"
-description = "Plausible inference models with Pyomo (screening, intervals, pixelization, structural feasibility)."
+# Rehearsal builds for TestPyPI use .devN versions; set to 0.1.0 for the PyPI release.
+version = "0.1.0.dev1"
+description = "Plausible inference for simulation experiments: screening, plausible intervals and pixelization, built on Pyomo."
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Jinbo Zhao" },
+    { name = "David J. Eckman" },
+]
 requires-python = ">=3.10"
-keywords = ["optimization", "pyomo", "plausible inference"]
+keywords = ["optimization", "pyomo", "plausible inference", "simulation", "statistical inference"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
 dependencies = [
     "numpy>=1.22",
     "pandas>=1.5",
@@ -40,6 +58,7 @@ docs = [
 Homepage = "https://github.com/Jinbo-Zhao/pinf"
 Documentation = "https://pinf.readthedocs.io/en/latest/"
 Repository = "https://github.com/Jinbo-Zhao/pinf"
+Issues = "https://github.com/Jinbo-Zhao/pinf/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
