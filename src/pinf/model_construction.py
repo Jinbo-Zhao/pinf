@@ -97,7 +97,7 @@ def parameter_definition(exp_set, num_objectives, inference_type):
 
 
 
-def model_construction(exp_set, num_objectives, inference_type, functional_properties_list, acceptability=None, discrepancy_type=None, confidence_level=None, sample_mean=None, sample_var=None, sample_size=None, functional_properties_parameters=None, upper_confidence_bounds=None, lower_confidence_bounds=None, feasibility_check_solver='scip', x0_feasible_region_A_ineq=None, x0_feasible_region_b_ineq=None, acceptability_parameters=None, interval_objective_index=1):
+def model_construction(exp_set, num_objectives, inference_type, functional_properties_list, acceptability=None, discrepancy_type=None, confidence_level=None, sample_mean=None, sample_var=None, sample_size=None, functional_properties_parameters=None, upper_confidence_bounds=None, lower_confidence_bounds=None, feasibility_check_solver='scip_direct', x0_feasible_region_A_ineq=None, x0_feasible_region_b_ineq=None, acceptability_parameters=None, interval_objective_index=1):
     """
     Construct the model (functional + confidence region + optional acceptability + objective).
 
@@ -107,7 +107,8 @@ def model_construction(exp_set, num_objectives, inference_type, functional_prope
     temporary objective is deleted. If infeasible, inference is aborted.
     Because this check is independent of x0, it runs only once per
     model_construction call (e.g. once in the main process before a parallel
-    loop). Pass feasibility_check_solver=None to skip the check.
+    loop). Pass feasibility_check_solver=None to skip the check. The default,
+    'scip_direct', uses PySCIPOpt, which is installed with the package.
     Only solvers that reliably report infeasible (e.g. 'gurobi') are
     supported for this check (e.g. Gurobi, SCIP). See
     STRUCTURAL_FEASIBILITY_CHECK_SOLVERS in solver_config.

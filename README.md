@@ -281,7 +281,7 @@ print(solver.available(exception_flag=False))      # True when Pyomo can use it
 `model_construction` first checks that the functional-property and
 confidence-region constraints are feasible. Choose the solver with
 `feasibility_check_solver` (`gurobi`, `gurobi_direct`, `scip` or `scip_direct`;
-default `scip`), or pass `None` to skip the check.
+default `scip_direct`), or pass `None` to skip the check.
 <!-- end: solvers -->
 
 ---
