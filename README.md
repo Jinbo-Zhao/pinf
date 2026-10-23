@@ -19,55 +19,45 @@ Given a set of simulated solutions, estimates of their objective values—provid
 ## Installation
 <!-- start: installation -->
 
-Requires Python ≥ 3.10. The package (`pinf`) uses a `src/` layout
-and is installed from a clone of this repository.
-
-Run the commands below from the repository root, inside the Python environment
-you will use the package from (for example after `conda activate <env>`).
+Requires Python ≥ 3.10.
 
 ### Using the package
 
-Install the package together with a solver, which is needed to run any
-inference (see the Solvers section):
+Install the package from PyPI:
 
 ```bash
-pip install -e ".[solvers]"
+pip install pinf
 ```
 
-To also use the Streamlit GUI:
+This also installs the Python interfaces of the Gurobi and SCIP solvers (see
+the Solvers section). The package is imported as `pinf`.
+
+### Working from a clone
+
+The Streamlit GUI, the tests and the documentation sources live in this
+repository but are not part of the published package. To use them, clone the
+repository and install it in editable mode from the repository root, inside the
+Python environment you will use (for example after `conda activate <env>`):
 
 ```bash
-pip install -e ".[gui,solvers]"
-```
-
-### Developing the package
-
-To run the tests and the linter (pytest, ruff), add the `dev` extra:
-
-```bash
-pip install -e ".[dev,solvers]"
-```
-
-### Building the documentation
-
-Only needed to build and preview the documentation site locally:
-
-```bash
-pip install -e ".[docs]"
+git clone https://github.com/Jinbo-Zhao/pinf.git
+cd pinf
+pip install -e ".[gui]"     # Streamlit GUI
+pip install -e ".[dev]"     # tests and linting (pytest, ruff)
+pip install -e ".[docs]"    # build the documentation locally
 ```
 
 ### Available extras
 
 | Extra | Adds | Needed for |
 |---|---|---|
-| *(none)* `pip install -e .` | NumPy, pandas, SciPy, Pyomo | Building models only; no solver to run them |
-| `solvers` | gurobipy, PySCIPOpt | Running inference |
-| `gui` | Streamlit, Matplotlib, openpyxl | The Streamlit GUI |
-| `dev` | pytest, ruff | Tests and linting |
-| `docs` | Sphinx, MyST, Read the Docs theme, sphinx-autoapi | Building the documentation |
+| *(none)* `pip install pinf` | NumPy, pandas, SciPy, Pyomo, gurobipy, PySCIPOpt | Building and solving models |
+| `gui` | Streamlit, Matplotlib, openpyxl | The Streamlit GUI (from a clone) |
+| `dev` | pytest, ruff | Tests and linting (from a clone) |
+| `docs` | Sphinx, MyST, Read the Docs theme, sphinx-autoapi | Building the documentation (from a clone) |
 
 Every extra already includes the core package. Combine extras in one command,
-for example `pip install -e ".[gui,dev,solvers]"`.
+for example `pip install -e ".[gui,dev]"`.
 <!-- end: installation -->
 
 ---
@@ -164,11 +154,10 @@ For statistics-based types, the package constructs a confidence region by boundi
 ## Quick Start
 <!-- start: quickstart -->
 
-**Before you run it:** activate your Python environment and install the package
-with a solver from the repository root:
+**Before you run it:** install the package:
 
 ```bash
-pip install -e ".[solvers]"
+pip install pinf
 ```
 
 ```python
@@ -256,7 +245,7 @@ handle them.
 Solver names: `gurobi`, `gurobi_direct`.
 
 ```bash
-pip install -e ".[solvers]"   # installs gurobipy
+pip install pinf   # includes gurobipy
 ```
 
 The pip-installed `gurobipy` includes a size-limited license that is enough for
@@ -270,13 +259,13 @@ installed differently:
 
 | Solver name | What it uses | How to install |
 |---|---|---|
-| `scip_direct` | PySCIPOpt (Python bindings that bundle the SCIP library) | `pip install -e ".[solvers]"` |
+| `scip_direct` | PySCIPOpt (Python bindings that bundle the SCIP library) | included in `pip install pinf` |
 | `scip` | the `scip` command-line executable | `conda install -c conda-forge scip`, or download an installer from [scipopt.org](https://www.scipopt.org/) |
 
 `pip install pyscipopt` does **not** provide the `scip` executable, so with a
 pip-only setup use `scip_direct`. To use `scip`, check that the executable is on
 `PATH` with `scip --version`. `scip_direct` requires Pyomo 6.10.1 or
-later, which the `solvers` extra installs.
+later, which `pip install pinf` installs.
 
 ### Checking a solver
 
@@ -300,11 +289,11 @@ default `scip`), or pass `None` to skip the check.
 ## Streamlit GUI
 <!-- start: gui -->
 
-**Before you run it:** activate your Python environment and install the package
-with the GUI and solver extras from the repository root:
+**Before you run it:** the GUI is not part of the published package. Clone the
+repository, then install it with the GUI extra from the repository root:
 
 ```bash
-pip install -e ".[gui,solvers]"
+pip install -e ".[gui]"
 ```
 
 Then start the app from the repository root, in the same environment:
@@ -353,11 +342,11 @@ Copyright (c) 2026 Jinbo Zhao and David J. Eckman.
 <!-- start: testing -->
 
 ```bash
-pip install -e ".[dev,solvers]"
+pip install -e ".[dev]"
 pytest
 ```
 
-Solve tests need Gurobi and SCIP available through Pyomo. The `solvers` extra
+Solve tests need Gurobi and SCIP available through Pyomo. The package
 installs `gurobipy` and PySCIPOpt (for `scip_direct`). Tests of the `scip`
 interface also need the SCIP executable on `PATH`
 (e.g. `conda install -c conda-forge scip`).

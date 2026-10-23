@@ -49,5 +49,5 @@ def scip_solver():
 def scip_direct_solver():
     return _require_plausibility_solver(
         "scip_direct",
-        "Install PySCIPOpt (pip install -e \".[solvers]\"), then re-run pytest.",
+        "Install PySCIPOpt (pip install -e \".[dev]\"), then re-run pytest.",
     )

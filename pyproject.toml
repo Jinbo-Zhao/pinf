@@ -13,7 +13,9 @@ keywords = ["optimization", "pyomo", "plausible inference"]
 dependencies = [
     "numpy>=1.22",
     "pandas>=1.5",
-    "pyomo>=6.6",
+    "pyomo>=6.10.1",  # first release with the scip_direct interface
+    "gurobipy>=10.0",
+    "pyscipopt>=5.0",
     "scipy>=1.9",
 ]
 
@@ -26,11 +28,6 @@ gui = [
 dev = [
     "pytest>=7.0",
     "ruff>=0.1.0",
-]
-solvers = [
-    "gurobipy>=10.0",
-    "pyscipopt>=5.0",
-    "pyomo>=6.10.1",  # first release with the scip_direct interface
 ]
 docs = [
     "sphinx>=7.2",
