@@ -19,7 +19,7 @@ Given a set of simulated solutions, estimates of their objective values—provid
 ## Installation
 <!-- start: installation -->
 
-Requires Python ≥ 3.10. The package (`plausible-inference`) uses a `src/` layout
+Requires Python ≥ 3.10. The package (`pinf`) uses a `src/` layout
 and is installed from a clone of this repository.
 
 Run the commands below from the repository root, inside the Python environment
@@ -173,9 +173,9 @@ pip install -e ".[solvers]"
 
 ```python
 import numpy as np
-from plausible_inference.model_construction import model_construction
-from plausible_inference.utils.solver_config import get_plausibility_solver
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
+from pinf.utils.solver_config import get_plausibility_solver
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
 
 # Two simulated solutions in 2-D, single objective, with explicit confidence bounds.
 exp_set = np.array([[0.0, 0.0], [1.0, 1.0]])
@@ -225,7 +225,7 @@ Once you have a model, use `run_execution_engine` to solve the inference over yo
 candidate points. It returns one `pandas.DataFrame` with a row per point:
 
 ```python
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
 
 results = run_execution_engine(
     ExecutionConfig(inference_type="screening"),
@@ -281,7 +281,7 @@ later, which the `solvers` extra installs.
 ### Checking a solver
 
 ```python
-from plausible_inference.utils.solver_config import get_plausibility_solver
+from pinf.utils.solver_config import get_plausibility_solver
 
 solver = get_plausibility_solver("scip_direct")   # or "gurobi", "scip", ...
 print(solver.available(exception_flag=False))      # True when Pyomo can use it
@@ -326,7 +326,7 @@ pixel grids), and runs the inference with downloadable results.
 ## Project Layout
 
 ```
-src/plausible_inference/
+src/pinf/
 ├── model_construction.py        # build the Pyomo model (entry point)
 ├── execution_engine.py         # batch-solve the optimization problems (run_execution_engine)
 ├── rules/

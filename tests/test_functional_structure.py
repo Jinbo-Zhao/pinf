@@ -1,7 +1,7 @@
 import numpy as np
 
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
-from plausible_inference.model_construction import model_construction
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
 
 def _interval(gurobi_solver, exp_set, values, candidate, functional_properties, parameters=None):
     values = np.asarray(values, dtype=float)

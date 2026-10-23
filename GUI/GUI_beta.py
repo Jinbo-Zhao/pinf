@@ -1,7 +1,7 @@
 # =============================================================================
 # Plausible Inference — Streamlit GUI
 # =============================================================================
-# Orchestrates user input, validation, calls to ``plausible_inference`` (Pyomo),
+# Orchestrates user input, validation, calls to ``pinf`` (Pyomo),
 # and result export. Does not implement inference logic.
 #
 # Install (must run from REPOSITORY ROOT — where pyproject.toml lives, not GUI/):
@@ -49,15 +49,15 @@ from gui_helpers import (
     x0_feasible_unit_box_template_xlsx_bytes,
 )
 
-# Must run before importing plausible_inference
+# Must run before importing pinf
 ensure_package_on_path()
 
-from plausible_inference.execution_engine import (  # noqa: E402
+from pinf.execution_engine import (  # noqa: E402
     ExecutionConfig,
     run_execution_engine,
 )
-from plausible_inference.model_construction import model_construction  # noqa: E402
-from plausible_inference.utils.solver_config import get_plausibility_solver  # noqa: E402
+from pinf.model_construction import model_construction  # noqa: E402
+from pinf.utils.solver_config import get_plausibility_solver  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # UI constants

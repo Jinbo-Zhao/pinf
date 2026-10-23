@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
-from plausible_inference.model_construction import model_construction
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
 
 
 def _convex_model(values, inference_type, feasibility_check_solver):

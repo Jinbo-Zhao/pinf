@@ -1,6 +1,6 @@
 """
 Thin helpers for the Streamlit GUI: path setup, CSV/DataFrame parsing, templates,
-and building arguments for plausible_inference (no inference logic here).
+and building arguments for pinf (no inference logic here).
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 
 # ---------------------------------------------------------------------------
-# Repository / import path (package lives under src/plausible_inference)
+# Repository / import path (package lives under src/pinf)
 # ---------------------------------------------------------------------------
 
 
@@ -30,7 +30,7 @@ def seeded_data_dir() -> Path:
 
 
 def ensure_package_on_path() -> Path:
-    """Insert ``src`` on sys.path so ``import plausible_inference`` works when not installed."""
+    """Insert ``src`` on sys.path so ``import pinf`` works when not installed."""
     root = project_root()
     src = root / "src"
     s = str(src)

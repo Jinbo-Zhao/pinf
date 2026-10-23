@@ -1,7 +1,7 @@
 import numpy as np
 
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
-from plausible_inference.model_construction import model_construction
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
 
 def _screen(gurobi_solver, execution, candidates):
     exp_set = np.array([[0.0], [1.0], [2.0]])

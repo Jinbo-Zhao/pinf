@@ -1,7 +1,7 @@
 import numpy as np
 import pyomo.environ as pyo
 
-from plausible_inference.utils.solver_config import (
+from pinf.utils.solver_config import (
     get_plausibility_solver,
     set_solver_time_limit,
 )
@@ -86,7 +86,7 @@ def test_scip_direct_time_limit(scip_direct_solver):
 
 
 def test_scip_direct_is_supported_for_structural_feasibility_check(scip_direct_solver):
-    from plausible_inference.model_construction import model_construction
+    from pinf.model_construction import model_construction
 
     model = model_construction(
         np.array([[0.0], [1.0]]),

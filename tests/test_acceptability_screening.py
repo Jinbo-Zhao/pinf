@@ -1,7 +1,7 @@
 import numpy as np
 
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
-from plausible_inference.model_construction import model_construction
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
 
 def _linear_function(exp_set):
     return np.asarray(exp_set, dtype=float)

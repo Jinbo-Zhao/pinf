@@ -3,7 +3,7 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "plausible-inference"
+name = "pinf"
 version = "0.1.0"
 description = "Plausible inference models with Pyomo (screening, intervals, pixelization, structural feasibility)."
 readme = "README.md"
