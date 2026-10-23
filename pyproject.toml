@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pinf"
 # Rehearsal builds for TestPyPI use .devN versions; set to 0.1.0 for the PyPI release.
-version = "0.1.0.dev1"
+version = "0.1.0"
 description = "Plausible inference for simulation experiments: screening, plausible intervals and pixelization, built on Pyomo."
 readme = "README.md"
 license = "MIT"
