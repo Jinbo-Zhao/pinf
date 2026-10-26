@@ -4,16 +4,11 @@
 # Orchestrates user input, validation, calls to ``pinf`` (Pyomo),
 # and result export. Does not implement inference logic.
 #
-# Install (must run from REPOSITORY ROOT — where pyproject.toml lives, not GUI/):
-#   cd /path/to/PI_Package
-#   pip install -e ".[gui]"
+# Install and launch:
+#   pip install "pinf[gui]"
+#   pinf-gui
 #
-# Run Streamlit (also from repository root so imports resolve):
-#   streamlit run GUI/GUI_beta.py
-#
-# If your shell is already inside GUI/:
-#   cd .. && pip install -e ".[gui]" && streamlit run GUI/GUI_beta.py
-#   # or: streamlit run GUI_beta.py   (still recommended: cwd = repo root)
+# Results are written to ./inference_results under the launch directory.
 # =============================================================================
 from __future__ import annotations
 
@@ -26,18 +21,16 @@ from typing import Any, Dict, List, Optional, Tuple
 import pandas as pd
 import streamlit as st
 
-from gui_helpers import (
+from pinf.gui.helpers import (
     PROP_LABEL_TO_INTERNAL,
     build_functional_properties_list,
     build_functional_properties_parameters,
     build_input_pixel_grid,
     build_output_pixel_grid,
     default_results_dir,
-    ensure_package_on_path,
     parse_simulation_dataframe,
     parse_subset_points,
     parse_x0_feasible_region_excel,
-    project_root,
     read_uploaded_table,
     simulation_template_csv_bounds,
     simulation_template_csv_stats,
@@ -48,16 +41,12 @@ from gui_helpers import (
     template_filename_x0_feasible_xlsx,
     x0_feasible_unit_box_template_xlsx_bytes,
 )
-
-# Must run before importing pinf
-ensure_package_on_path()
-
-from pinf.execution_engine import (  # noqa: E402
+from pinf.execution_engine import (
     ExecutionConfig,
     run_execution_engine,
 )
-from pinf.model_construction import model_construction  # noqa: E402
-from pinf.utils.solver_config import get_plausibility_solver  # noqa: E402
+from pinf.model_construction import model_construction
+from pinf.utils.solver_config import get_plausibility_solver
 
 # ---------------------------------------------------------------------------
 # UI constants
@@ -425,8 +414,6 @@ def main() -> None:
     st.title("Plausible Inference")
     st.caption("Screening, plausible intervals, and pixelization from your simulation data.")
 
-    root = project_root()
-    st.sidebar.markdown(f"**Project root:** `{root}`")
     results_dir = default_results_dir()
     st.sidebar.markdown(f"**Results folder:** `{results_dir}`")
 

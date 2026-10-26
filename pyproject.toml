@@ -44,6 +44,7 @@ gui = [
     "openpyxl>=3.1",
 ]
 dev = [
+    "pinf[gui]",  # the GUI tests run the Streamlit app
     "pytest>=7.0",
     "ruff>=0.1.0",
 ]
@@ -54,6 +55,9 @@ docs = [
     "myst-nb>=1.0",
 ]
 
+[project.scripts]
+pinf-gui = "pinf.gui.launcher:main"
+
 [project.urls]
 Homepage = "https://github.com/Jinbo-Zhao/pinf"
 Documentation = "https://pinf.readthedocs.io/en/latest/"
@@ -62,6 +66,9 @@ Issues = "https://github.com/Jinbo-Zhao/pinf/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"pinf.gui" = ["seeded_data/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

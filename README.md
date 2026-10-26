@@ -32,9 +32,16 @@ pip install pinf
 This also installs the Python interfaces of the Gurobi and SCIP solvers (see
 the Solvers section). The package is imported as `pinf`.
 
+To also install the Streamlit GUI (launched with `pinf-gui`, see the Streamlit
+GUI section):
+
+```bash
+pip install "pinf[gui]"
+```
+
 ### Working from a clone
 
-The Streamlit GUI, the tests and the documentation sources live in this
+The tests, the demo notebooks and the documentation sources live in this
 repository but are not part of the published package. To use them, clone the
 repository and install it in editable mode from the repository root, inside the
 Python environment you will use (for example after `conda activate <env>`):
@@ -42,8 +49,8 @@ Python environment you will use (for example after `conda activate <env>`):
 ```bash
 git clone https://github.com/Jinbo-Zhao/pinf.git
 cd pinf
-pip install -e ".[gui]"     # Streamlit GUI
-pip install -e ".[dev]"     # tests and linting (pytest, ruff)
+pip install -e ".[gui]"     # Streamlit GUI (pinf-gui) and the demo notebooks
+pip install -e ".[dev]"     # tests and linting (pytest, ruff); includes gui
 pip install -e ".[docs]"    # build the documentation locally
 ```
 
@@ -52,8 +59,8 @@ pip install -e ".[docs]"    # build the documentation locally
 | Extra | Adds | Needed for |
 |---|---|---|
 | *(none)* `pip install pinf` | NumPy, pandas, SciPy, Pyomo, gurobipy, PySCIPOpt | Building and solving models |
-| `gui` | Streamlit, Matplotlib, openpyxl | The Streamlit GUI (from a clone) |
-| `dev` | pytest, ruff | Tests and linting (from a clone) |
+| `gui` | Streamlit, Matplotlib, openpyxl | The Streamlit GUI (`pinf-gui`) and the demo notebooks |
+| `dev` | pytest, ruff, and the `gui` extra | Tests and linting (from a clone) |
 | `docs` | Sphinx, MyST, Read the Docs theme, sphinx-autoapi | Building the documentation (from a clone) |
 
 Every extra already includes the core package. Combine extras in one command,
@@ -289,21 +296,22 @@ default `scip_direct`), or pass `None` to skip the check.
 ## Streamlit GUI
 <!-- start: gui -->
 
-**Before you run it:** the GUI is not part of the published package. Clone the
-repository, then install it with the GUI extra from the repository root:
+The GUI ships with the package. Install it with the GUI extra:
 
 ```bash
-pip install -e ".[gui]"
+pip install "pinf[gui]"
 ```
 
-Then start the app from the repository root, in the same environment:
+Then start it from the directory where you want results to be saved:
 
 ```bash
-streamlit run GUI/GUI_beta.py
+pinf-gui
 ```
 
 Streamlit prints a local URL (usually <http://localhost:8501>) and opens it in
-your browser. Stop the app with Ctrl+C in the terminal.
+your browser. Stop the app with Ctrl+C in the terminal. Results are written to
+`inference_results/` under the launch directory. Options after `pinf-gui` are
+passed to `streamlit run`, for example `pinf-gui --server.port 8600`.
 
 The GUI guides the user through problem setup, acceptability + threshold inputs, simulation
 upload (statistics or bounds templates), procedure-specific inputs (candidate points or
@@ -323,12 +331,16 @@ src/pinf/
 │   ├── acceptability.py         # acceptability constraints
 │   ├── confidence_regions.py    # discrepancy measures + cutoffs
 │   └── auxiliary_constraints.py # abs/max linearization helpers
-└── utils/
-    ├── cutoff_calculation.py    # Monte-Carlo / closed-form discrepancy cutoffs
-    ├── model_construction_inputs.py        # input validation
-    ├── functional_properties_validation.py # property-parameter validation
-    └── solver_config.py         # solver factory + time limits
-GUI/                             # Streamlit app + helpers + example data
+├── utils/
+│   ├── cutoff_calculation.py    # Monte-Carlo / closed-form discrepancy cutoffs
+│   ├── model_construction_inputs.py        # input validation
+│   ├── functional_properties_validation.py # property-parameter validation
+│   └── solver_config.py         # solver factory + time limits
+└── gui/
+    ├── app.py                   # Streamlit app
+    ├── helpers.py               # parsing, templates, argument builders
+    ├── launcher.py              # `pinf-gui` entry point
+    └── seeded_data/             # example CSV/XLSX inputs
 ```
 
 ---
