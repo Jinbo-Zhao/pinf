@@ -28,7 +28,7 @@ tutorials/02_multi_objective_demo
 :maxdepth: 2
 :caption: Reference
 
-autoapi/plausible_inference/index
+autoapi/pinf/index
 testing
 references
 ```

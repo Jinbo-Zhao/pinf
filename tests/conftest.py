@@ -3,7 +3,7 @@ import pytest
 
 def _require_plausibility_solver(solver_name: str, install_hint: str):
     try:
-        from plausible_inference.utils.solver_config import get_plausibility_solver
+        from pinf.utils.solver_config import get_plausibility_solver
     except ImportError as exc:
         pytest.fail(
             "Pyomo is required but could not be imported. "
@@ -49,5 +49,5 @@ def scip_solver():
 def scip_direct_solver():
     return _require_plausibility_solver(
         "scip_direct",
-        "Install PySCIPOpt (pip install -e \".[solvers]\"), then re-run pytest.",
+        "Install PySCIPOpt (pip install -e \".[dev]\"), then re-run pytest.",
     )

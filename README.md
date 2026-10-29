@@ -19,55 +19,52 @@ Given a set of simulated solutions, estimates of their objective values—provid
 ## Installation
 <!-- start: installation -->
 
-Requires Python ≥ 3.10. The package (`plausible-inference`) uses a `src/` layout
-and is installed from a clone of this repository.
-
-Run the commands below from the repository root, inside the Python environment
-you will use the package from (for example after `conda activate <env>`).
+Requires Python ≥ 3.10.
 
 ### Using the package
 
-Install the package together with a solver, which is needed to run any
-inference (see the Solvers section):
+Install the package from PyPI:
 
 ```bash
-pip install -e ".[solvers]"
+pip install pinf
 ```
 
-To also use the Streamlit GUI:
+This also installs the Python interfaces of the Gurobi and SCIP solvers (see
+the Solvers section). The package is imported as `pinf`.
+
+To also install the Streamlit GUI (launched with `pinf-gui`, see the Streamlit
+GUI section):
 
 ```bash
-pip install -e ".[gui,solvers]"
+pip install "pinf[gui]"
 ```
 
-### Developing the package
+### Working from a clone
 
-To run the tests and the linter (pytest, ruff), add the `dev` extra:
-
-```bash
-pip install -e ".[dev,solvers]"
-```
-
-### Building the documentation
-
-Only needed to build and preview the documentation site locally:
+The tests, the demo notebooks and the documentation sources live in this
+repository but are not part of the published package. To use them, clone the
+repository and install it in editable mode from the repository root, inside the
+Python environment you will use (for example after `conda activate <env>`):
 
 ```bash
-pip install -e ".[docs]"
+git clone https://github.com/Jinbo-Zhao/pinf.git
+cd pinf
+pip install -e ".[gui]"     # Streamlit GUI (pinf-gui) and the demo notebooks
+pip install -e ".[dev]"     # tests and linting (pytest, ruff); includes gui
+pip install -e ".[docs]"    # build the documentation locally
 ```
 
 ### Available extras
 
 | Extra | Adds | Needed for |
 |---|---|---|
-| *(none)* `pip install -e .` | NumPy, pandas, SciPy, Pyomo | Building models only; no solver to run them |
-| `solvers` | gurobipy, PySCIPOpt | Running inference |
-| `gui` | Streamlit, Matplotlib, openpyxl | The Streamlit GUI |
-| `dev` | pytest, ruff | Tests and linting |
-| `docs` | Sphinx, MyST, Read the Docs theme, sphinx-autoapi | Building the documentation |
+| *(none)* `pip install pinf` | NumPy, pandas, SciPy, Pyomo, gurobipy, PySCIPOpt | Building and solving models |
+| `gui` | Streamlit, Matplotlib, openpyxl | The Streamlit GUI (`pinf-gui`) and the demo notebooks |
+| `dev` | pytest, ruff, and the `gui` extra | Tests and linting (from a clone) |
+| `docs` | Sphinx, MyST, Read the Docs theme, sphinx-autoapi | Building the documentation (from a clone) |
 
 Every extra already includes the core package. Combine extras in one command,
-for example `pip install -e ".[gui,dev,solvers]"`.
+for example `pip install -e ".[gui,dev]"`.
 <!-- end: installation -->
 
 ---
@@ -164,18 +161,17 @@ For statistics-based types, the package constructs a confidence region by boundi
 ## Quick Start
 <!-- start: quickstart -->
 
-**Before you run it:** activate your Python environment and install the package
-with a solver from the repository root:
+**Before you run it:** install the package:
 
 ```bash
-pip install -e ".[solvers]"
+pip install pinf
 ```
 
 ```python
 import numpy as np
-from plausible_inference.model_construction import model_construction
-from plausible_inference.utils.solver_config import get_plausibility_solver
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
+from pinf.utils.solver_config import get_plausibility_solver
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
 
 # Two simulated solutions in 2-D, single objective, with explicit confidence bounds.
 exp_set = np.array([[0.0, 0.0], [1.0, 1.0]])
@@ -225,7 +221,7 @@ Once you have a model, use `run_execution_engine` to solve the inference over yo
 candidate points. It returns one `pandas.DataFrame` with a row per point:
 
 ```python
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
 
 results = run_execution_engine(
     ExecutionConfig(inference_type="screening"),
@@ -256,7 +252,7 @@ handle them.
 Solver names: `gurobi`, `gurobi_direct`.
 
 ```bash
-pip install -e ".[solvers]"   # installs gurobipy
+pip install pinf   # includes gurobipy
 ```
 
 The pip-installed `gurobipy` includes a size-limited license that is enough for
@@ -270,18 +266,18 @@ installed differently:
 
 | Solver name | What it uses | How to install |
 |---|---|---|
-| `scip_direct` | PySCIPOpt (Python bindings that bundle the SCIP library) | `pip install -e ".[solvers]"` |
+| `scip_direct` | PySCIPOpt (Python bindings that bundle the SCIP library) | included in `pip install pinf` |
 | `scip` | the `scip` command-line executable | `conda install -c conda-forge scip`, or download an installer from [scipopt.org](https://www.scipopt.org/) |
 
 `pip install pyscipopt` does **not** provide the `scip` executable, so with a
 pip-only setup use `scip_direct`. To use `scip`, check that the executable is on
 `PATH` with `scip --version`. `scip_direct` requires Pyomo 6.10.1 or
-later, which the `solvers` extra installs.
+later, which `pip install pinf` installs.
 
 ### Checking a solver
 
 ```python
-from plausible_inference.utils.solver_config import get_plausibility_solver
+from pinf.utils.solver_config import get_plausibility_solver
 
 solver = get_plausibility_solver("scip_direct")   # or "gurobi", "scip", ...
 print(solver.available(exception_flag=False))      # True when Pyomo can use it
@@ -292,7 +288,7 @@ print(solver.available(exception_flag=False))      # True when Pyomo can use it
 `model_construction` first checks that the functional-property and
 confidence-region constraints are feasible. Choose the solver with
 `feasibility_check_solver` (`gurobi`, `gurobi_direct`, `scip` or `scip_direct`;
-default `scip`), or pass `None` to skip the check.
+default `scip_direct`), or pass `None` to skip the check.
 <!-- end: solvers -->
 
 ---
@@ -300,21 +296,22 @@ default `scip`), or pass `None` to skip the check.
 ## Streamlit GUI
 <!-- start: gui -->
 
-**Before you run it:** activate your Python environment and install the package
-with the GUI and solver extras from the repository root:
+The GUI ships with the package. Install it with the GUI extra:
 
 ```bash
-pip install -e ".[gui,solvers]"
+pip install "pinf[gui]"
 ```
 
-Then start the app from the repository root, in the same environment:
+Then start it from the directory where you want results to be saved:
 
 ```bash
-streamlit run GUI/GUI_beta.py
+pinf-gui
 ```
 
 Streamlit prints a local URL (usually <http://localhost:8501>) and opens it in
-your browser. Stop the app with Ctrl+C in the terminal.
+your browser. Stop the app with Ctrl+C in the terminal. Results are written to
+`inference_results/` under the launch directory. Options after `pinf-gui` are
+passed to `streamlit run`, for example `pinf-gui --server.port 8600`.
 
 The GUI guides the user through problem setup, acceptability + threshold inputs, simulation
 upload (statistics or bounds templates), procedure-specific inputs (candidate points or
@@ -326,7 +323,7 @@ pixel grids), and runs the inference with downloadable results.
 ## Project Layout
 
 ```
-src/plausible_inference/
+src/pinf/
 ├── model_construction.py        # build the Pyomo model (entry point)
 ├── execution_engine.py         # batch-solve the optimization problems (run_execution_engine)
 ├── rules/
@@ -334,30 +331,34 @@ src/plausible_inference/
 │   ├── acceptability.py         # acceptability constraints
 │   ├── confidence_regions.py    # discrepancy measures + cutoffs
 │   └── auxiliary_constraints.py # abs/max linearization helpers
-└── utils/
-    ├── cutoff_calculation.py    # Monte-Carlo / closed-form discrepancy cutoffs
-    ├── model_construction_inputs.py        # input validation
-    ├── functional_properties_validation.py # property-parameter validation
-    └── solver_config.py         # solver factory + time limits
-GUI/                             # Streamlit app + helpers + example data
+├── utils/
+│   ├── cutoff_calculation.py    # Monte-Carlo / closed-form discrepancy cutoffs
+│   ├── model_construction_inputs.py        # input validation
+│   ├── functional_properties_validation.py # property-parameter validation
+│   └── solver_config.py         # solver factory + time limits
+└── gui/
+    ├── app.py                   # Streamlit app
+    ├── helpers.py               # parsing, templates, argument builders
+    ├── launcher.py              # `pinf-gui` entry point
+    └── seeded_data/             # example CSV/XLSX inputs
 ```
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
+This project is licensed under the MIT License. See [`LICENSE`](https://github.com/Jinbo-Zhao/pinf/blob/main/LICENSE) for details.
 
 Copyright (c) 2026 Jinbo Zhao and David J. Eckman.
 ## Testing
 <!-- start: testing -->
 
 ```bash
-pip install -e ".[dev,solvers]"
+pip install -e ".[dev]"
 pytest
 ```
 
-Solve tests need Gurobi and SCIP available through Pyomo. The `solvers` extra
+Solve tests need Gurobi and SCIP available through Pyomo. The package
 installs `gurobipy` and PySCIPOpt (for `scip_direct`). Tests of the `scip`
 interface also need the SCIP executable on `PATH`
 (e.g. `conda install -c conda-forge scip`).

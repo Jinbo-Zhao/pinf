@@ -1,7 +1,7 @@
 import numpy as np
 
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
-from plausible_inference.model_construction import model_construction
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
 
 def test_upper_and_lower_intervals_finite_and_unbounded_paths(gurobi_solver):
     exp_set = np.array([[0.0, 0.0], [1.0, 1.0]], dtype=float)

@@ -10,8 +10,8 @@ This module provides a solver factory that sets options accordingly:
 
 - Gurobi: DualReductions=0. See https://support.gurobi.com/hc/en-us/articles/4402704428177
 - SCIP: misc/allowstrongdualreds and misc/allowweakdualreds = False. Both the
-  'scip' executable interface and 'scip_direct' (PySCIPOpt, pip-installable via
-  the 'solvers' extra) are supported.
+  'scip' executable interface and 'scip_direct' (PySCIPOpt, installed with the
+  package) are supported.
 
 GLPK is not supported for plausibility inference (no special handling).
 """

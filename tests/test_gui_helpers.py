@@ -1,31 +1,25 @@
 from __future__ import annotations
 
 import io
-import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import pytest
 
-_ROOT = Path(__file__).resolve().parents[1]
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
+import pinf.gui.helpers as gh
 
-import GUI.gui_helpers as gh
-
-def test_project_paths():
-    root = gh.project_root()
-    assert root == Path(__file__).resolve().parents[1]
-    assert (root / "pyproject.toml").is_file()
+def test_seeded_data_ships_with_package():
     seeded = gh.seeded_data_dir()
-    assert seeded == root / "GUI" / "seeded_data"
-    assert seeded.is_dir()
+    assert seeded == Path(gh.__file__).resolve().parent / "seeded_data"
+    assert (seeded / "pi_simulation_stats_s2_m1.csv").is_file()
+    assert (seeded / "x0_feasible_region_s2.xlsx").is_file()
 
-def test_ensure_package_on_path():
-    root = gh.ensure_package_on_path()
-    assert root == gh.project_root()
-    assert str(root / "src") in sys.path
+def test_default_results_dir_is_under_working_directory(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    results_dir = gh.default_results_dir()
+    assert results_dir == tmp_path / gh.RESULTS_DIR_NAME
+    assert results_dir.is_dir()
 
 def test_simulation_template_stats_roundtrip():
     csv_text = gh.simulation_template_csv_stats(2, 1, num_example_rows=2)

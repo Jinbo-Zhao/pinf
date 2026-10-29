@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from plausible_inference.utils.cutoff_calculation import calc_cutoff
+from pinf.utils.cutoff_calculation import calc_cutoff
 
 def test_crn_closed_form():
     k, n, alpha = 2, 50.0, 0.05

@@ -1,4 +1,4 @@
-"""Sphinx configuration for the plausible-inference documentation.
+"""Sphinx configuration for the pinf documentation.
 
 Build locally from the repository root:
 
@@ -53,7 +53,7 @@ nb_execution_mode = "off"
 # -- AutoAPI -----------------------------------------------------------------
 
 autoapi_type = "python"
-autoapi_dirs = [str(PROJECT_ROOT / "src" / "plausible_inference")]
+autoapi_dirs = [str(PROJECT_ROOT / "src" / "pinf")]
 autoapi_root = "autoapi"
 autoapi_add_toctree_entry = False
 autoapi_keep_files = False
