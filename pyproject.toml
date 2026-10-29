@@ -1,39 +1,74 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "plausible-inference"
+name = "pinf"
+# Rehearsal builds for TestPyPI use .devN versions; set to 0.1.0 for the PyPI release.
 version = "0.1.0"
-description = "Plausible inference models with Pyomo (screening, intervals, pixelization, structural feasibility)."
+description = "Plausible inference for simulation experiments: screening, plausible intervals and pixelization, built on Pyomo."
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Jinbo Zhao" },
+    { name = "David J. Eckman" },
+]
 requires-python = ">=3.10"
-keywords = ["optimization", "pyomo", "plausible inference"]
+keywords = ["optimization", "pyomo", "plausible inference", "simulation", "statistical inference"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
 dependencies = [
     "numpy>=1.22",
-    "pyomo>=6.6",
+    "pandas>=1.5",
+    "pyomo>=6.10.1",  # first release with the scip_direct interface
+    "gurobipy>=10.0",
+    "pyscipopt>=5.0",
     "scipy>=1.9",
 ]
 
 [project.optional-dependencies]
 gui = [
     "matplotlib>=3.6",
-    "pandas>=1.5",
     "streamlit>=1.28",
     "openpyxl>=3.1",
 ]
 dev = [
+    "pinf[gui]",  # the GUI tests run the Streamlit app
     "pytest>=7.0",
     "ruff>=0.1.0",
-    "pandas>=1.5",
 ]
-solvers = [
-    "gurobipy>=10.0",
+docs = [
+    "sphinx>=7.2",
+    "sphinx-rtd-theme>=2.0",
+    "sphinx-autoapi>=3.0",
+    "myst-nb>=1.0",
 ]
+
+[project.scripts]
+pinf-gui = "pinf.gui.launcher:main"
+
+[project.urls]
+Homepage = "https://github.com/Jinbo-Zhao/pinf"
+Documentation = "https://pinf.readthedocs.io/en/latest/"
+Repository = "https://github.com/Jinbo-Zhao/pinf"
+Issues = "https://github.com/Jinbo-Zhao/pinf/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"pinf.gui" = ["seeded_data/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from plausible_inference.execution_engine import ExecutionConfig, run_execution_engine
-from plausible_inference.model_construction import model_construction
+from pinf.execution_engine import ExecutionConfig, run_execution_engine
+from pinf.model_construction import model_construction
 
 
 def _convex_model(values, inference_type, feasibility_check_solver):
@@ -82,3 +82,19 @@ def test_discrepancy_type_required():
             acceptability="single-objective-optimality",
             feasibility_check_solver=None,
         )
+
+
+def test_default_feasibility_check_works_without_the_scip_executable(monkeypatch):
+    # A pip-only install has PySCIPOpt but no `scip` executable on PATH.
+    monkeypatch.setenv("PATH", "/usr/bin:/bin")
+    model = model_construction(
+        np.array([[0.0], [1.0]]),
+        num_objectives=1,
+        inference_type="screening",
+        functional_properties_list=[["convexity"]],
+        acceptability="single-objective-optimality",
+        discrepancy_type="confidence_region",
+        upper_confidence_bounds=np.array([[2.0], [3.0]]),
+        lower_confidence_bounds=np.array([[1.0], [2.0]]),
+    )
+    assert model is not None

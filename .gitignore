@@ -12,4 +12,9 @@ CODE_REVIEW_plausible_inference.md
 .pytest_cache/
 
 # Streamlit GUI run outputs
-GUI/inference_results/
+inference_results/
+
+# Sphinx build output and notebook copies made by docs/source/conf.py
+docs/build/
+docs/source/tutorials/
+build/

@@ -109,15 +109,17 @@ def add_acceptability_constraints(
 
     ``acceptability_parameters`` carries the numeric constants for the
     threshold-based acceptabilities (single-objective, minimization, on m[0,1]):
-      - ``delta-optimality``: needs ``delta`` (>=0); adds m[0,1] - m[i,1] <= delta
-        for all i (x0 within delta of the best simulated objective). No gradient
-        shortcut is used even under convexity/concavity.
-      - ``feasibility`` (single- or multi-objective): needs ``threshold`` (scalar broadcast
-        to all objectives, or a length-num_objectives sequence); adds m[0,d] <= threshold[d]
-        for every objective d.
-      - ``closeness-to-target`` (single- or multi-objective): needs ``threshold`` and
-        ``delta`` (>=0), each a scalar (broadcast) or a length-num_objectives sequence;
-        adds threshold[d] - delta[d] <= m[0,d] <= threshold[d] + delta[d] for every d.
+
+    - ``delta-optimality``: needs ``delta`` (>=0); adds m[0,1] - m[i,1] <= delta
+      for all i (x0 within delta of the best simulated objective). No gradient
+      shortcut is used even under convexity/concavity.
+    - ``feasibility`` (single- or multi-objective): needs ``threshold`` (scalar broadcast
+      to all objectives, or a length-num_objectives sequence); adds m[0,d] <= threshold[d]
+      for every objective d.
+    - ``closeness-to-target`` (single- or multi-objective): needs ``threshold`` and
+      ``delta`` (>=0), each a scalar (broadcast) or a length-num_objectives sequence;
+      adds threshold[d] - delta[d] <= m[0,d] <= threshold[d] + delta[d] for every d.
+
     Numeric constants are forwarded to module-level rule functions as keyword
     arguments (the same pattern as the Lipschitz / convexity rules), so the
     constructed model stays picklable for the multiprocessing pool.

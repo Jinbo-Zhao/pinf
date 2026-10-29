@@ -1,12 +1,11 @@
 """
-Thin helpers for the Streamlit GUI: path setup, CSV/DataFrame parsing, templates,
-and building arguments for plausible_inference (no inference logic here).
+Thin helpers for the Streamlit GUI: CSV/DataFrame parsing, templates,
+and building arguments for pinf (no inference logic here).
 """
 
 from __future__ import annotations
 
 import io
-import sys
 from dataclasses import dataclass
 from itertools import product
 from pathlib import Path
@@ -15,28 +14,12 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 import numpy as np
 import pandas as pd
 
-# ---------------------------------------------------------------------------
-# Repository / import path (package lives under src/plausible_inference)
-# ---------------------------------------------------------------------------
-
-
-def project_root() -> Path:
-    return Path(__file__).resolve().parent.parent
+RESULTS_DIR_NAME = "inference_results"
 
 
 def seeded_data_dir() -> Path:
-    """Bundled example CSV/XLSX for the GUI (under ``GUI/seeded_data``)."""
+    """Bundled example CSV/XLSX for the GUI (installed with the package)."""
     return Path(__file__).resolve().parent / "seeded_data"
-
-
-def ensure_package_on_path() -> Path:
-    """Insert ``src`` on sys.path so ``import plausible_inference`` works when not installed."""
-    root = project_root()
-    src = root / "src"
-    s = str(src)
-    if s not in sys.path:
-        sys.path.insert(0, s)
-    return root
 
 
 # ---------------------------------------------------------------------------
@@ -499,6 +482,7 @@ def build_output_pixel_grid(
 
 
 def default_results_dir() -> Path:
-    d = project_root() / "GUI" / "inference_results"
+    """Results folder under the directory the GUI was launched from."""
+    d = Path.cwd() / RESULTS_DIR_NAME
     d.mkdir(parents=True, exist_ok=True)
     return d

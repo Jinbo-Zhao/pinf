@@ -7,8 +7,12 @@ can hide the true status. For correct inference we need to distinguish
 infeasible from unbounded.
 
 This module provides a solver factory that sets options accordingly:
+
 - Gurobi: DualReductions=0. See https://support.gurobi.com/hc/en-us/articles/4402704428177
-- SCIP: misc/allowstrongdualreds and misc/allowweakdualreds = False.
+- SCIP: misc/allowstrongdualreds and misc/allowweakdualreds = False. Both the
+  'scip' executable interface and 'scip_direct' (PySCIPOpt, installed with the
+  package) are supported.
+
 GLPK is not supported for plausibility inference (no special handling).
 """
 
@@ -17,11 +21,11 @@ import pyomo.environ as pyo
 
 # Known solver names that we can configure (lowercase for comparison).
 GUROBI_NAMES = ('gurobi', 'gurobi_direct')
-SCIP_NAMES = ('scip',)
+SCIP_NAMES = ('scip', 'scip_direct')
 
 # Solvers supported for the structural feasibility check (reliably report infeasible vs feasible).
 # GLPK is not supported.
-STRUCTURAL_FEASIBILITY_CHECK_SOLVERS = ('gurobi', 'gurobi_direct', 'scip')
+STRUCTURAL_FEASIBILITY_CHECK_SOLVERS = ('gurobi', 'gurobi_direct', 'scip', 'scip_direct')
 
 
 def get_plausibility_solver(solver_name, **solver_options):
@@ -35,7 +39,7 @@ def get_plausibility_solver(solver_name, **solver_options):
     Parameters
     ----------
     solver_name : str
-        Name of the solver (e.g. 'gurobi', 'scip'). GLPK is not supported.
+        Name of the solver (e.g. 'gurobi', 'scip', 'scip_direct'). GLPK is not supported.
     **solver_options
         Additional options to pass to the solver. These are applied after
         the infeasibility/unboundedness options.

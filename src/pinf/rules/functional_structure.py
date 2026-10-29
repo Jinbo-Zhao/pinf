@@ -16,7 +16,7 @@ def constraint_convexity_rule(model,i,j,d):
 
 
 def constraint_Lipschitz_rule(model,i,j,d,lip_CST):
-    """Constraint Lipschitz: m_i - m_j - lip_CST * ||x_i - x_j||_2 <= 0"""
+    """Constraint Lipschitz: ``m_i - m_j - lip_CST * ||x_i - x_j||_2 <= 0``"""
     if i!=j:
         exp_set = model._exp_set_data
         vector_diff = exp_set[i, :] - exp_set[j, :]
@@ -29,7 +29,7 @@ def constraint_Lipschitz_rule(model,i,j,d,lip_CST):
 
 
 def constraint_directional_Lipschitz_rule(model, i, j, d, lip_CST_vector):
-    """Constraint directional Lipschitz: m_i - m_j <= \sum_{s} lip_CST_vector(s) * |x_is - x_js|"""
+    r"""Constraint directional Lipschitz: ``m_i - m_j <= \sum_{s} lip_CST_vector(s) * |x_is - x_js|``"""
     if i == j: 
         return pyo.Constraint.Skip
     

@@ -1,9 +1,9 @@
 import pytest
 
-from plausible_inference.utils.model_construction_inputs import (
+from pinf.utils.model_construction_inputs import (
     validate_model_construction_core_inputs,
 )
-from plausible_inference.utils.functional_properties_validation import (
+from pinf.utils.functional_properties_validation import (
     validate_functional_properties_parameters,
 )
 

@@ -1,0 +1,13 @@
+/* The RTD theme keeps table cells on one line (white-space: nowrap), so long
+   cells push tables past the page width and force horizontal scrolling.
+   Let cell text wrap instead. */
+.wy-table-responsive table td,
+.wy-table-responsive table th {
+  white-space: normal;
+}
+
+/* Keep short identifiers in the first column (e.g. `delta-optimality`)
+   from breaking at hyphens mid-word. */
+.wy-table-responsive table td:first-child code {
+  white-space: nowrap;
+}

@@ -27,7 +27,7 @@ def constraint_max_rule(model, d, i):
 # so we must linearize abs ourselves before re-enabling this path.
 def abs_logic_cases(model, i, j, s, case):
     """
-    Rule function for Disjunct: |x_is - x_js|
+    Rule function for Disjunct: ``|x_is - x_js|``
     
     Note: In Pyomo Disjunct rule functions, the first parameter 'model' is actually
     the DisjunctData object, not the main model. We need to access the main model
